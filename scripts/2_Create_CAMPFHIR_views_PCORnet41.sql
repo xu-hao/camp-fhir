@@ -10,11 +10,11 @@
 create or replace view PCORNET_PATIENT_2FHIR as (
 SELECT
     dem.PATID as PNT_IDENTIFIER, 
-    nvl(tcc1.fhir_out_cd, null) as PNT_GENDER,
+    coalesce(tcc1.fhir_out_cd, null) as PNT_GENDER,
     BIRTH_DATE as PNT_BIRTHDATE,
     null as PNT_MARITAL_STATUS_CODE, 
-    nvl(tcc3.fhir_out_cd, null) as PNT_RACE,
-    nvl(tcc4.fhir_out_cd, null) as PNT_ETHNICITY,
+    coalesce(tcc3.fhir_out_cd, null) as PNT_RACE,
+    coalesce(tcc4.fhir_out_cd, null) as PNT_ETHNICITY,
     null as PNT_ADDRESS_EXT_LAT_VALUE,
     null as PNT_ADDRESS_EXT_LONG_VALUE
 FROM 
@@ -22,7 +22,7 @@ FROM
     left join PCORNET_FHIR_MAPPING tcc1 on tcc1.column_cd='SEX' and dem.SEX=tcc1.local_in_cd
     left join PCORNET_FHIR_MAPPING tcc3 on tcc3.column_cd='RACE' and dem.RACE=tcc3.local_in_cd
     left join PCORNET_FHIR_MAPPING tcc4 on tcc4.column_cd='HISPANIC' and dem.HISPANIC=tcc4.local_in_cd
-)
+);
 
 --ENCOUNTER
 --ENC_IDENTIFIER maps to Encounter / identifier
@@ -50,14 +50,14 @@ select
 	        when enc.PROVIDERID is null then null else 'Practitioner/'||enc.PROVIDERID 
 	    end as ENC_PARTICIPANT_INDIV_REF, 
         'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode' as ENC_CLASS_SYST,
-        nvl(tcc1.fhir_out_cd, null) as ENC_CLASS_CODE,
-        nvl(tcc1.fhir_out_char, null) as ENC_CLASS_DISPLAY,
+        coalesce(tcc1.fhir_out_cd, null) as ENC_CLASS_CODE,
+        coalesce(tcc1.fhir_out_char, null) as ENC_CLASS_DISPLAY,
         enc.ADMIT_DATE as ENC_PERIOD_START,
         enc.DISCHARGE_DATE as ENC_PERIOD_END,
-        nvl(tcc2.fhir_out_cd, null) as ENC_HOSP_DISDISP_CODING_CODE,
-        nvl(tcc2.fhir_out_char, null) as ENC_HOSP_DISDISP_TEXT,
-        nvl(tcc3.fhir_out_cd, null) as ENC_HOSP_ADMSRC_CODING_CODE, 
-        nvl(tcc3.fhir_out_char, null) as ENC_HOSP_ADMSRC_TEXT, 
+        coalesce(tcc2.fhir_out_cd, null) as ENC_HOSP_DISDISP_CODING_CODE,
+        coalesce(tcc2.fhir_out_char, null) as ENC_HOSP_DISDISP_TEXT,
+        coalesce(tcc3.fhir_out_cd, null) as ENC_HOSP_ADMSRC_CODING_CODE, 
+        coalesce(tcc3.fhir_out_char, null) as ENC_HOSP_ADMSRC_TEXT, 
         case
             when dx.DIAGNOSISID is null then null else 'Condition/'||dx.DIAGNOSISID 
         end as ENC_DIAGN_CON_REF, 
@@ -73,7 +73,7 @@ from
         left join pcornet_fhir_mapping tcc1 on tcc1.column_cd='ENC_TYPE' and enc.enc_type=tcc1.local_in_cd
         left join pcornet_fhir_mapping tcc2 on tcc2.column_cd='DISCHARGE_STATUS' and enc.discharge_status=tcc2.local_in_cd
         left join pcornet_fhir_mapping tcc3 on tcc3.column_cd='ADMITTING_SOURCE' and enc.admitting_source=tcc3.local_in_cd
-)
+);
 
 --CONDITION
 --CON_IDENTIFIER maps to Condition / identifier
@@ -133,7 +133,7 @@ select distinct
 	'https://www.hl7.org/fhir/valueset-condition-category' as CON_CATEGORY_CODING_SYST,
 	'problem-list-item' as CON_CATEGORY_CODING_CODE,
 	to_char(cond.REPORT_DATE, 'YYYY-MM-DD') as CON_ASSERT_DATE,
-	nvl(tcc1.FHIR_OUT_CD,'active') as CON_CLINSTATUS, 
+	coalesce(tcc1.FHIR_OUT_CD,'active') as CON_CLINSTATUS, 
 	to_char(cond.RESOLVE_DATE, 'YYYY-MM-DD') as CON_ABATEDATE, 
 	to_char(cond.ONSET_DATE, 'YYYY-MM-DD') as CON_ONSETDATE 
 from
@@ -141,7 +141,7 @@ from
 	left join pcornet_fhir_mapping tcc1 on tcc1.column_cd='CONDITION_STATUS' and cond.CONDITION_STATUS=tcc1.local_in_cd
 where
     cond.CONDITION_SOURCE = 'HC' --limit to problem list items only
-)
+);
 
 
 --PROCEDURE
@@ -175,7 +175,7 @@ select distinct
 	px.PX_DATE as PCD_PERFORMED_PDT
 from
 	procedures px
-)
+);
 
 --OBSERVATION (VITALS AND SMOKING)
 --OBS_IDENTIFIER maps to Observation / identifier
@@ -359,8 +359,8 @@ select distinct
     'social-history' as OBS_CATEGORY_CODE,
     'Social History' as OBS_CATEGORY_DISPLAY,
      'http://snomed.info/sct/' as OBS_CODE_CODING_SYST,
-     nvl(tcc1.fhir_out_cd, null) as OBS_CODE_CODING_CODE,
-     nvl(tcc1.fhir_out_char, null) as OBS_CODE_CODING_DISPLAY,
+     coalesce(tcc1.fhir_out_cd, null) as OBS_CODE_CODING_CODE,
+     coalesce(tcc1.fhir_out_char, null) as OBS_CODE_CODING_DISPLAY,
      null as OBS_VALUEQUANTITY_VALUE,
      null as OBS_VALUEQUANTITY_COMPARATOR,
      null as OBS_VALUEQUANTITY_CODE,
@@ -377,7 +377,7 @@ from
     left join pcornet_fhir_mapping tcc1 on tcc1.column_cd='SMOKING' and vit.SMOKING=tcc1.local_in_cd
 where
     vit.SMOKING is not null
-)
+);
 
 --OBSERVATION (LABS)
 --OBS_IDENTIFIER maps to Observation / identifier 
@@ -413,26 +413,26 @@ select distinct
     LAB_LOINC as OBS_CODE_CODING_CODE,
     null as OBS_CODE_CODING_DISPLAY,
     labs.RESULT_NUM as OBS_VALUEQUANTITY_VALUE,
-    nvl(tcc1.FHIR_OUT_CD,null) as OBS_VALUEQUANTITY_COMPARATOR,
+    coalesce(tcc1.FHIR_OUT_CD,null) as OBS_VALUEQUANTITY_COMPARATOR,
     case  
         when labs.RESULT_UNIT = 'NI' then null
         else labs.RESULT_UNIT
     end as OBS_VALUEQUANTITY_CODE,
     case
         when labs.RESULT_QUAL = 'NI' then null
-        else nvl(labs.RESULT_QUAL,labs.RAW_RESULT) 
+        else coalesce(labs.RESULT_QUAL,labs.RAW_RESULT) 
     end as OBS_VALUESTRING,
     labs.RESULT_DATE as OBS_ISSUED, 
-    nvl(labs.SPECIMEN_DATE,labs.LAB_ORDER_DATE) as OBS_EFFECTIVEDATETIME,
+    coalesce(labs.SPECIMEN_DATE,labs.LAB_ORDER_DATE) as OBS_EFFECTIVEDATETIME,
     labs.NORM_RANGE_LOW as OBS_REFRANGE_LOW, 
     labs.NORM_RANGE_HIGH as OBS_REFRANGE_HIGH, 
-    nvl(tcc2.FHIR_OUT_CD,null) as OBS_INTERPRETATION_CODE, 
+    coalesce(tcc2.FHIR_OUT_CD,null) as OBS_INTERPRETATION_CODE, 
     'http://hl7.org/fhir/ValueSet/observation-interpretation' as OBS_INTERPRETATION_SYST 
 from
     lab_result_cm labs
     left join PCORNET_FHIR_MAPPING tcc1 on tcc1.column_cd='RESULT_MODIFIER' and labs.RESULT_MODIFIER=tcc1.local_in_cd
     left join PCORNET_FHIR_MAPPING tcc2 on tcc2.column_cd='ABN_IND' and labs.ABN_IND=tcc2.local_in_cd
-)
+);
 
 
 --MEDICATION REQUEST
@@ -484,16 +484,16 @@ select distinct
     med.RX_QUANTITY as MED_DISPREQ_QUANT, 
     med.RX_REFILLS as MED_DISPREQ_NUMREPS, 
     med.RX_DAYS_SUPPLY as MED_DISPREQ_EXPSUPP, 
-    nvl(tcc1.FHIR_OUT_CD,null) as MED_DOSINSTX_TEXT, 
-    nvl(tcc2.FHIR_OUT_CD,null) as MED_DOSINSTX_ASNDBOOL, 
+    coalesce(tcc1.FHIR_OUT_CD,null) as MED_DOSINSTX_TEXT, 
+    coalesce(tcc2.FHIR_OUT_CD,null) as MED_DOSINSTX_ASNDBOOL, 
     med.RX_ROUTE as MED_DOSINSTX_ROUTE, 
-    nvl(tcc3.FHIR_OUT_CD,null) as MED_SUBSTITU_ALLOWED 
+    coalesce(tcc3.FHIR_OUT_CD,null) as MED_SUBSTITU_ALLOWED 
 from 
     PRESCRIBING med
     left join PCORNET_FHIR_MAPPING tcc1 on tcc1.column_cd='RX_FREQUENCY' and med.RX_FREQUENCY=tcc1.local_in_cd
     left join PCORNET_FHIR_MAPPING tcc2 on tcc2.column_cd='RX_PRN_FLAG' and med.RX_PRN_FLAG=tcc2.local_in_cd
     left join PCORNET_FHIR_MAPPING tcc3 on tcc3.column_cd='RX_DISPENSE_AS_WRITTEN' and med.RX_DISPENSE_AS_WRITTEN=tcc3.local_in_cd
-)
+);
 
 
 --PRACTITIONER 
@@ -502,8 +502,8 @@ from
 create or replace view PCORNET_PRACTITIONER_2FHIR as (
 select 
     prov.PROVIDERID as PRACT_IDENTIFIER,
-    nvl(tcc1.FHIR_OUT_CD,null) as PRACT_GENDER
+    coalesce(tcc1.FHIR_OUT_CD,null) as PRACT_GENDER
 from 
     provider prov
     left join PCORNET_FHIR_MAPPING tcc1 on tcc1.column_cd='PROVIDER_SEX' and prov.PROVIDER_SEX=tcc1.local_in_cd
-)
+);
