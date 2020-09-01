@@ -105,7 +105,7 @@ public class ProcedureService
 			System.out.println(i);
 	     }
 	     
-	     writeFile("/opt/Procedure/", i, bundle);
+	     writeFile("./Procedure/", i, bundle);
 		procedureDao.closeCurrentSession();
 	}
 	

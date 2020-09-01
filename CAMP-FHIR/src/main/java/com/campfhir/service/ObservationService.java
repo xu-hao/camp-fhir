@@ -141,7 +141,7 @@ public class ObservationService
 			if ((i % partition) == 0)
 			{
 				System.out.println("Write");				
-				writeFile("/opt/Observation_VitalsSmoking/", i, bundle);
+				writeFile("./Observation_VitalsSmoking/", i, bundle);
 		    	session.flush();
 		    	session.clear();
 			    bundle = new Bundle().setType(BundleType.COLLECTION);
@@ -156,7 +156,7 @@ public class ObservationService
 			System.out.println(i);
 	     }
 	     
-	     writeFile("/opt/Observation_VitalsSmoking/", i, bundle);
+	     writeFile("./Observation_VitalsSmoking/", i, bundle);
 		observationDao.closeCurrentSession();
 	}
 	

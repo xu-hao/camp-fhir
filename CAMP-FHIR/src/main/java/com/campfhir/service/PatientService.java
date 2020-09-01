@@ -156,7 +156,7 @@ public class PatientService
 				   .setFullUrl("https://www.hl7.org/fhir/patient.html")
 				   .setResource(pac.Patients((Patient) patients.get(0), elist, clist, mlist, plist, llist, vlist));
 				i++;
-				writeFile("/opt/all", i, bundle);	
+				writeFile("./all", i, bundle);	
 				bundle = new Bundle();
 	     }
 	}

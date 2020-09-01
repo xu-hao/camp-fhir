@@ -35,7 +35,7 @@ public class HibernateBaseDB
 	    	java.util.Properties properties = new Properties();
 	    	try 
 	    	{
-				fileInputStream = new FileInputStream("/opt/config.properties");
+				fileInputStream = new FileInputStream("./config.properties");
 				properties.load(fileInputStream);
 			} 
 	    	catch (FileNotFoundException e) 
@@ -53,7 +53,7 @@ public class HibernateBaseDB
 
 	        DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
 
-	        Document doc = docBuilder.parse("/opt/table.hbm.xml");
+	        Document doc = docBuilder.parse("./table.hbm.xml");
 			configuration.configure("hibernate.cfg.xml").addProperties(properties)
 	        .addDocument(doc);
 	        
