@@ -54,6 +54,7 @@ select
         coalesce(tcc1.fhir_out_char, null) as ENC_CLASS_DISPLAY,
         enc.ADMIT_DATE as ENC_PERIOD_START,
         enc.DISCHARGE_DATE as ENC_PERIOD_END,
+	'http://terminology.hl7.org/CodeSystem/v3-ActCode' as ENC_HOSP_DISDISP_CODING_SYST,
         coalesce(tcc2.fhir_out_cd, null) as ENC_HOSP_DISDISP_CODING_CODE,
         coalesce(tcc2.fhir_out_char, null) as ENC_HOSP_DISDISP_TEXT,
         coalesce(tcc3.fhir_out_cd, null) as ENC_HOSP_ADMSRC_CODING_CODE, 
