@@ -141,7 +141,7 @@ public class ObservationService
 			if ((i % partition) == 0)
 			{
 				System.out.println("Write");				
-				writeFile("./Observation_VitalsSmoking/", i, bundle);
+				writeFile(path, i, bundle);
 		    	session.flush();
 		    	session.clear();
 			    bundle = new Bundle().setType(BundleType.COLLECTION);
