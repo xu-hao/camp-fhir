@@ -226,8 +226,12 @@ public class LabConversion
         if(observation.getOBS_REFRANGE_LOW() != null)
         {
             SimpleQuantity l = new SimpleQuantity();
-            l.setValue(Double.parseDouble(observation.getOBS_REFRANGE_LOW()));
+	    try {
+		l.setValue(Double.parseDouble(observation.getOBS_REFRANGE_LOW()));
 			orrc.setLow(l);
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
         }
 		/******************** OBS_REFRANGE_HIGH *****************************************************************************
 		 * OBS_REFRANGE_HIGH maps to Observation / referenceRange / high
@@ -235,8 +239,12 @@ public class LabConversion
         if(observation.getOBS_REFRANGE_HIGH() != null)
         {	
         	SimpleQuantity h = new SimpleQuantity();
-        	h.setValue(Double.parseDouble(observation.getOBS_REFRANGE_HIGH()));
-        	orrc.setLow(h);
+		try {
+		    h.setValue(Double.parseDouble(observation.getOBS_REFRANGE_HIGH()));
+		    orrc.setLow(h);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
         }
 		
         List<ObservationReferenceRangeComponent> rr = new ArrayList<ObservationReferenceRangeComponent>();
