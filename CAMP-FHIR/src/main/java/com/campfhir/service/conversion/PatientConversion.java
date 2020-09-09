@@ -60,17 +60,20 @@ public class PatientConversion
 			 ********************************************************************************************************************/
 			if(patient.getPNT_BIRTHDATE() != null)
 			{
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
-				Date date;
-				try 
-				{
-					date = sdf.parse(patient.getPNT_BIRTHDATE());
-					n.setBirthDate(date);
-				} 
-				catch (ParseException e) 
-				{
-					e.printStackTrace();
-				}				
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
+			    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM");
+			    Date date;
+			    try {
+				date = sdf.parse(patient.getPNT_BIRTHDATE());
+				n.setBirthDate(date);
+			    } catch (ParseException e) {
+				try {
+				    date = sdf2.parse(patient.getPNT_BIRTHDATE());
+				    n.setBirthDate(date);
+				} catch (ParseException e) {
+				    e.printStackTrace();
+				}
+			    }
 			}
 			
 			CodeableConcept ms = new CodeableConcept();
