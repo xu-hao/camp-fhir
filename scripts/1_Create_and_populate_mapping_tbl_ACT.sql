@@ -11,56 +11,36 @@ CREATE TABLE ACT_FHIR_MAPPING  (
 -- Patient mappings 
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-  VALUES('PATIENT_DIMENSION', 'SEX_CD', 'DEM|SEX:M', 'male', 'Male', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html');
+VALUES
+	('DEMOGRAPHIC', 'SEX', 'M', 'male', 'Male', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html')
+	('DEMOGRAPHIC', 'SEX', 'F', 'female', 'Female', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html')
+	('DEMOGRAPHIC', 'SEX', 'NI', 'unknown', 'Unknown', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html')
+	('DEMOGRAPHIC', 'SEX', 'A', 'other', 'Other', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html')
+	('DEMOGRAPHIC', 'SEX', 'OT', 'other', 'Other', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html')
+	('DEMOGRAPHIC', 'SEX', 'UN', 'unknown', 'Unknown', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html');
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-  VALUES('PATIENT_DIMENSION', 'SEX_CD', 'DEM|SEX:F', 'female', 'Female', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html');
+       ('DEMOGRAPHIC', 'HISPANIC', 'Y', '2135-2', 'Hispanic or Latino', NULL, 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html')
+       ('DEMOGRAPHIC', 'HISPANIC', 'N', '2186-5', 'Not Hispanic or Latino', NULL, 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html')
+       ('DEMOGRAPHIC', 'HISPANIC', 'NI', NULL, NULL, 'No Mapping for No Information', 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html')
+       ('DEMOGRAPHIC', 'HISPANIC', 'R', NULL, NULL, 'No Mapping for Refuse to answer', 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html')
+       ('DEMOGRAPHIC', 'HISPANIC', 'UN', NULL, NULL, 'No Mapping for Unknown', 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html')
+       ('DEMOGRAPHIC', 'HISPANIC', 'OT', NULL, NULL, 'No Mapping for Other', 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html');
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-  VALUES('PATIENT_DIMENSION', 'SEX_CD', 'DEM|SEX:NI', 'unknown', 'Unknown', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-  VALUES('PATIENT_DIMENSION', 'SEX_CD', 'DEM|SEX:A', 'other', 'Other', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-  VALUES('PATIENT_DIMENSION', 'SEX_CD', 'DEM|SEX:O', 'unknown', 'Unknown', NULL, 'PNT_GENDER', 'https://hl7.org/fhir/STU3/valueset-administrative-gender.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'ETHNICITY_CD', 'DEM|HISP:Y', '2135-2', 'Hispanic or Latino', NULL, 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'ETHNICITY_CD', 'DEM|HISP:N', '2186-5', 'Not Hispanic or Latino', NULL, 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'ETHNICITY_CD', 'DEM|HISP:NI', NULL, NULL, 'No Mapping for No Info', 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:NA', '1002-5', 'American Indian or Alaska Native', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:AS', '2028-9', 'Asian', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:B', '2054-5', 'Black or African American', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:M', NULL, NULL, 'No Mapping for Multiple Races', 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:H', '2076-8', 'Native Hawaiian or Other Pacific Islander', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:NI', '2131-1', 'Other', 'No Mapping for No Information', 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:W', '2106-3', 'White', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'RACE_CD', 'DEM|RACE:O', '2131-1', 'Other',NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', '01', '1002-5', 'American Indian or Alaska Native', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', '02', '2028-9', 'Asian', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', '03', '2054-5', 'Black or African American', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', '04', '2076-8', 'Native Hawaiian or Other Pacific Islander', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', '05', '2106-3', 'White', NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', '06', NULL, NULL, 'No Mapping for Multiple Races', 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', 'NI', '2131-1', 'Other', 'No Mapping for No Information', 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', 'OT', '2131-1', 'Other',NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
+       ('DEMOGRAPHIC', 'RACE', 'UN', '2131-1', 'Other',NULL, 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
 
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('PATIENT_DIMENSION', 'VITAL_STATUS_CD', 'DEM|VITAL STATUS:D', '1', NULL, NULL, 'PNT_DECEASED', 'https://www.hl7.org/fhir/patient-definitions.html#Patient.deceased_x_');
+VALUES('DEMOGRAPHIC', 'VITAL_STATUS_CD', 'DEM|VITAL STATUS:D', '1', NULL, NULL, 'PNT_DECEASED', 'https://www.hl7.org/fhir/patient-definitions.html#Patient.deceased_x_');
 --Patient Mappings if Ethnicity is store in Observation Fact
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
 VALUES('OBSERVATION_FACT', 'CONCEPT_CD', 'DEM|HISP:Y', '2135-2', 'Hispanic or Latino', NULL, 'PNT_ETHNICITY', 'https://www.hl7.org/fhir/v3/Ethnicity/cs.html');
@@ -76,25 +56,17 @@ INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR
 VALUES('VISIT_DIMENSION', 'RACE_CD', 'DEM|RACE:W', '2106-3', NULL, 'White', 'PNT_RACE', 'https://www.hl7.org/fhir/v3/Race/cs.html');
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'O', 'AMB', 'ambulatory', NULL, 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'E', 'EMER', 'emergency', NULL, 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'EI', 'IMP', 'impatient encounter', 'imperfect match', 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'I', 'IMP', 'impatient encounter', NULL, 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'NA', 'NONAC', 'impatient non-acute', NULL, 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'X', 'AMB', 'ambulatory', NULL, 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('VISIT_DIMENSION', 'INOUT_CD', 'N', NULL, NULL,'No Mapping for Unknown', 'ENC_CLASS_CODE', 'http://hl7.org/fhir/ValueSet/v3-ActEncounterCode');
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'AV', 'AMB', 'ambulatory', NULL, 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'ED', 'EMER', 'emergency', NULL, 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'EI', 'IMP', 'impatient encounter', 'imperfect match', 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'IP', 'IMP', 'impatient encounter', NULL, 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'IS', 'NONAC', 'impatient non-acute', NULL, 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'OS', 'OBSENC', 'observational encounter', NULL, 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'IC', NULL, NULL, 'No Mapping for Institutional Professional Consult (permissible substitution)', 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'OA', 'AMB', 'ambulatory', NULL, 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'NI', NULL, NULL,'No Mapping for No information', 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'UN', NULL, NULL,'No Mapping for Unknown', 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode')
+VALUES('VISIT_DIMENSION', 'ENC_TYPE', 'OT', NULL, NULL,'No Mapping for Other', 'ENC_CLASS_CODE', 'http://terminology.hl7.org/CodeSystem/v3-ActCode');
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
 VALUES('OBSERVATION_FACT', 'MODIFIER_CD', 'ACT|DIAG_PRIORITY:P', 1, NULL,'Imperfect Match', 'ENC_DIAG_RANK', 'https://www.hl7.org/fhir/encounter-definitions.html#Encounter.diagnosis.rank');
@@ -109,21 +81,11 @@ INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR
 VALUES('OBSERVATION_FACT', 'MODIFIER_CD', '@', NULL, NULL,'No priority information provided', 'ENC_DIAG_RANK', 'https://www.hl7.org/fhir/encounter-definitions.html#Encounter.diagnosis.rank');
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'E', '=', 'Equal' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'GE', '>=', 'Greater than or Equal' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'G', '>', 'Greater than' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'LE', '<=', 'Less than or equal' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
-VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'L', '<', 'Less than' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html');
-
-INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)
+VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'EQ', '=', 'Equal' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html')
+VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'GE', '>=', 'Greater than or Equal' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html')
+VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'GT', '>', 'Greater than' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html')
+VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'LE', '<=', 'Less than or equal' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html')
+VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'LT', '<', 'Less than' ,NULL, 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html')
 VALUES('OBSERVATION_FACT', 'TVAL_CHAR', 'TX', NULL, NULL ,'No mapping for text entries', 'OBS_VALUEQUANTITY_COMPARATOR', 'https://www.hl7.org/fhir/v3/RelationalOperator/cs.html');
 
 INSERT INTO ACT_FHIR_MAPPING(TABLE_CD, COLUMN_CD, LOCAL_IN_CD, FHIR_OUT_CD, FHIR_OUT_CHAR, COMMENTS, FHIR_OUT_COLUMN, FHIR_SYSTEM)

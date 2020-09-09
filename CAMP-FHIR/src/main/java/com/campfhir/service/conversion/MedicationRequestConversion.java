@@ -229,23 +229,28 @@ public class MedicationRequestConversion
 		
 		List<Dosage> dosageArray = new ArrayList<Dosage>();
 		Dosage dose = new Dosage();
+		SimpleQuantity doseQuantity = new SimpleQuantity();
 
 		/******************** MED_DOSINSTX_DOSEQUANT_VAL ********************************************************************
 		 * MED_DOSINSTX_DOSEQUANT_VAL maps to MedicationRequest / dosageInstruction / doseQuantity / value
 		 ********************************************************************************************************************/
 		if(medication.getMED_DOSINSTX_DOSEQUANT_VAL() != null)
 		{
-			dose.setDose(new Quantity()
-					.setValue(Double.parseDouble(medication.getMED_DOSINSTX_DOSEQUANT_VAL())));
-			
-			dosageArray.add(dose);
+		    try {
+
+			doseQuantity.setValue(Double.parseDouble(medication.getMED_DOSINSTX_DOSEQUANT_VAL()));
+
+		    } catch (Exception e) {
+			e.printStackTrace();
+		    }
+
 		}
 		
 		/******************** MED_DOSINSTX_DOSEQUANT_UNIT ********************************************************************
 		 * MED_DOSINSTX_DOSEQUANT_UNIT maps to MedicationRequest / dosageInstruction / doseQuantity / unit
 		 ********************************************************************************************************************/	
-		dose.setDose(new Quantity()
-				.setUnit(medication.getMED_DOSINSTX_DOSEQUANT_UNIT()));
+		doseQuantity.setUnit(medication.getMED_DOSINSTX_DOSEQUANT_UNIT());
+		dose.setDose(doseQuantity);
 		
 		/******************** MED_DOSINSTX_TEXT *****************************************************************************
 		 * MED_DOSINSTX_TEXT maps to MedicationRequest / dosageInstruction / text

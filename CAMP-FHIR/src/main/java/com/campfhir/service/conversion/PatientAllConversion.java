@@ -74,6 +74,7 @@ public class PatientAllConversion
 			if(patient.getPNT_BIRTHDATE() != null)
 			{
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
+				SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM");
 				Date date;
 				try 
 				{
@@ -82,7 +83,13 @@ public class PatientAllConversion
 				} 
 				catch (ParseException e) 
 				{
+				    try {
+					date = sdf2.parse(patient.getPNT_BIRTHDATE());
+					n.setBirthDate(date);
+
+				    } catch (ParseException e) {
 					e.printStackTrace();
+				    }
 				}				
 			}
 			
