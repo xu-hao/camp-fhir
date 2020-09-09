@@ -156,7 +156,7 @@ public class ObservationService
 			System.out.println(i);
 	     }
 	     
-	     writeFile("./Observation_VitalsSmoking/", i, bundle);
+	     writeFile(path, i, bundle);
 		observationDao.closeCurrentSession();
 	}
 	
