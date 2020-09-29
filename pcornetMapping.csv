@@ -6,7 +6,7 @@ TABLE_CD,COLUMN_CD,LOCAL_IN_CD,FHIR_OUT_CD,FHIR_OUT_CHAR,COMMENTS,FHIR_OUT_COLUM
 'OBS_CLIN','OBSCLIN_TIME',,,,,'Observation/value/valueTime','OBSCLINID','Observation/value/valueTime','https://www.hl7.org/fhir/datatypes.html#time'
 'OBS_CLIN','OBSCLIN_RESULT_NUM',,,,,'Observation/value/Quantity/value','OBSCLINID','Observation/value/Quantity/value','https://www.hl7.org/fhir/datatypes-definitions.html#Quantity.value'
 'OBS_CLIN','OBSCLIN_RESULT_UNIT',,,,,'Observation/value/Quantity/unit','OBSCLINID','Observation/value/Quantity/unit','https://www.hl7.org/fhir/datatypes-definitions.html#Quantity.unit'
-'OBS_CLIN','PATID',,,,,Patient/id',OBSCLINID','Patient/identifier','https://www.hl7.org/fhir/datatypes.html#Identifier'
+'OBS_CLIN','PATID',,,,,'Patient/id',OBSCLINID','Patient/identifier','https://www.hl7.org/fhir/datatypes.html#Identifier'
 'DEATH','DEATH_DATE',,,,,'Patient/deceased/deceasedDateTime','PATID,DEATH_SOURCE','Patient/deceased/deceasedDateTime','https://www.hl7.org/fhir/datatypes.html#dateTime'
 'DEATH_CAUSE','DEATH_CAUSE',,,,,'Condition/code','PATID, DEATH_CAUSE, DEATH_CAUSE_CODE, DEATH_CAUSE_TYPE, DEATH_CAUSE_SOURCE','Condition/code','http://hl7.org/fhir/R4/valueset-condition-code.html'
 'DEATH','PATID',,,,,Patient/id',"PATID,DEATH_SOURCE'",'Patient/identifier','https://www.hl7.org/fhir/datatypes.html#Identifier'
