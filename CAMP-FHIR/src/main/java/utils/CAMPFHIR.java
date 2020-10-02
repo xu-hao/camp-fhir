@@ -77,7 +77,7 @@ public class CAMPFHIR
 		    new EncounterService().findAll(partition, path);			
 		}	
 		
-		else if(domain.equals("Observation_Labs"))
+		else if(domain.equals("Labs"))
 		{
 			new ObservationService().findAllLab(partition, path);
 		}	
@@ -133,7 +133,7 @@ public class CAMPFHIR
 		{
 		    new ProcedureService().findAll(partition, path);
 		}	
-		else if(domain.equals("Observation_VitalsSmoking"))
+		else if(domain.equals("Vital"))
 		{
 		    new ObservationService().findAllVital(partition, path);
 		}
