@@ -204,26 +204,27 @@ with open("create.sql", "w") as outf:
                         column_types[col_name] = ty           
                         if force_null:                           
                             force_nulls.append(col_name)
-                    with open(f"{datafiles}/{table_name}.csv") as f:
-                        colnames_full = map(lambda x: x.replace('"', "").replace("\n", ""), f.readline().split("|"))
+                    tablefi = f"{datafiles}/{table_name}.csv"
+                    if os.path.isfile(tablefi):
+                        with open(tablefi) as f:
+                            colnames_full = map(lambda x: x.replace('"', "").replace("\n", ""), f.readline().split("|"))
                     
-                    columns = []  
+                        columns = []  
                      
-                    for col_name in colnames_full:
-                        if col_name not in column_types:
-                            print(f"not specified {col_name}")
-                            col_type = "text"
-                        else:   
-                            col_type = column_types[col_name]
+                        for col_name in colnames_full:
+                            if col_name not in column_types:
+                                print(f"not specified {col_name}")
+                                col_type = "text"
+                            else:   
+                                col_type = column_types[col_name]
                                             
-                        columns.append(f'{col_name} {col_type}')
+                            columns.append(f'{col_name} {col_type}')
                               
-                    outf.write(f'create table {table_name} ({",".join(columns)});\n')
-                    cwd = os.getcwd()                            
-                    psql_cmd = f"\\copy {table_name} FROM '{datafiles}/{table_name}.csv' WITH CSV HEADER DELIMITER '|' NULL ''"
-                    if len(force_nulls) != 0:
-                         psql_cmd += ' FORCE NULL '+",".join(force_nulls)
-                    psql_cmd += ';\n'           
-                    ingestf.write(psql_cmd)     
-                    dropf.write(f'drop table {table_name};\n')
-                    deletef.write(f'delete from {table_name};\n')
+                        outf.write(f'create table {table_name} ({",".join(columns)});\n')
+                        psql_cmd = f"\\copy {table_name} FROM '{datafiles}/{table_name}.csv' WITH CSV HEADER DELIMITER '|' NULL ''"
+                        if len(force_nulls) != 0:
+                            psql_cmd += ' FORCE NULL '+",".join(force_nulls)
+                        psql_cmd += ';\n'           
+                        ingestf.write(psql_cmd)     
+                        dropf.write(f'drop table {table_name};\n')
+                        deletef.write(f'delete from {table_name};\n')
