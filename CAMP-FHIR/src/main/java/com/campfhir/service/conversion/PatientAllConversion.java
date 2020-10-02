@@ -87,7 +87,7 @@ public class PatientAllConversion
 					date = sdf2.parse(patient.getPNT_BIRTHDATE());
 					n.setBirthDate(date);
 
-				    } catch (ParseException e) {
+				    } catch (ParseException e2) {
 					e.printStackTrace();
 				    }
 				}				
