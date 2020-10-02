@@ -88,7 +88,7 @@ public class PatientAllConversion
 					n.setBirthDate(date);
 
 				    } catch (ParseException e2) {
-					e.printStackTrace();
+					e2.printStackTrace();
 				    }
 				}				
 			}
