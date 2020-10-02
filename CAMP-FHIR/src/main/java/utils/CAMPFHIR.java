@@ -77,7 +77,7 @@ public class CAMPFHIR
 		    new EncounterService().findAll(partition, path);			
 		}	
 		
-		else if(domain.equals("Labs"))
+		else if(domain.equals("Lab"))
 		{
 			new ObservationService().findAllLab(partition, path);
 		}	
